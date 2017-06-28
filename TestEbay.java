@@ -14,9 +14,9 @@ import org.openqa.selenium.interactions.Actions;
 
 public class TestEbay {
 	static WebDriver driver;
-	static WebElement searchbox,searchbutton,searchtab,selectproduct,itemcondion,timeleft,productPrice,productName,addCart,shoppingCartHeader;
+	static WebElement searchbox,searchbutton,searchtab,selectproduct,itemcondion,timeleft,productPrice,productName,addCart,shoppingCartHeader,cardProdName,cardProdPrice,totalProdPrice,guestchkoutscreen;
 	
-	 String itemprice;
+	 String itemprice,prodName;
 
 public static void main(String[] args) throws InterruptedException, IOException {
 		
@@ -32,6 +32,8 @@ public static void main(String[] args) throws InterruptedException, IOException 
 		testebay.storeProductDetails();
 		testebay.addtoCart();
 		testebay.verifyShopppingcart();
+		testebay.verifyInformationcart();
+		testebay.guestCheckout();
 		
 	
 
@@ -48,14 +50,10 @@ private void openapplication()
 	System.out.println(ApplicationConstant.search_key);
 	driver.get(ApplicationConstant.application_url);
 	
-	
-
 }
 
 private void searchbykey() throws InterruptedException {
-	
 	System.out.println("Inside searchbykey");
-	
 	searchbox=driver.findElement(By.id(ApplicationConstant.searchbox_id));
 	searchbox.sendKeys(ApplicationConstant.search_key);
 	System.out.println("Inside searchbykey1");
@@ -180,7 +178,7 @@ private void storeProductDetails()
 	 System.out.println("Inside storeProductDetails" +itemprice);
 	 
 	productName =driver.findElement(By.id("itemTitle"));
-	String prodName=productName.getText();
+	 prodName=productName.getText();
 	 System.out.println("Inside storeProductDetails" +prodName);
 		
 	 
@@ -220,6 +218,50 @@ private void verifyShopppingcart()
 
 private void verifyInformationcart()
 {
+	
+	System.out.println("Inside verifyInformationcart");
+	cardProdName=driver.findElement(By.id("282544983816_title"));
+	String cardItemName=cardProdName.getText();
+	
+	System.out.println("step1"+cardItemName);
+	
+	cardProdPrice=driver.findElement(By.className("fw-b"));
+	String cardItemPrice=cardProdPrice.getText();
+	
+	System.out.println("step2"+cardItemPrice);
+	
+	totalProdPrice=driver.findElement(By.id("asyncTotal"));
+	String totalItemPrice=totalProdPrice.getText();
+	
+	System.out.println("step3"+totalItemPrice);
+	
+	if (cardItemName.equalsIgnoreCase(prodName)||cardItemPrice.equals(itemprice)||totalItemPrice.equals(cardItemPrice))
+	{
+		System.out.println("Information is verfied sussessfuly");
+		
+		driver.findElement(By.id("ptcBtnBottom")).click();
+		
+	}
+	
+	
+	
+	
+}
+
+
+private void guestCheckout()
+{
+	driver.findElement(By.id("gtChk")).click();
+	
+	guestchkoutscreen=driver.findElement(By.className("page-title"));
+	
+	String guest_screen=guestchkoutscreen.getText();
+	
+	if(guest_screen.equalsIgnoreCase(ApplicationConstant.checkoutScreenPage))
+	{
+		System.out.println("Logged in as guest account");
+	}
+	
 	
 }
 	  
