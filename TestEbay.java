@@ -21,18 +21,44 @@ public class TestEbay {
 public static void main(String[] args) throws InterruptedException, IOException {
 		
 		TestEbay testebay=new TestEbay();
+		
+		
+		  // Open Chrome Browser and Application
 		testebay.openapplication();
+		  
+		//Get Serach key and search product
 		testebay.searchbykey();
+		
+		//Check listed Search item category is Sony TV
 		testebay.checkListedItemContainsSearchedName(driver, ApplicationConstant.search_key);
+		
+		//Filter list by size
 		testebay.filterbyscreensize();
+		
+		//Select any random product
 		testebay.selectproduct();
+		
+		//Verify product condition
 		testebay.verifyProductCondition();
-		//testebay.timeLeftFormat();
+		
+		/*testebay.timeLeftFormat();*/
+		
+		//Verify item price format
 		testebay.verifyPriceFormat();
+		
+		//Verify store Product Details
 		testebay.storeProductDetails();
+		
+		//add selected produce into cart
 		testebay.addtoCart();
+		
+		//Verify shopping cart is open
 		testebay.verifyShopppingcart();
+		
+		//Verify information inside the cart is correct
 		testebay.verifyInformationcart();
+		
+		//continue shopping with the guest account
 		testebay.guestCheckout();
 		
 	
@@ -238,16 +264,9 @@ private void verifyInformationcart()
 	if (cardItemName.equalsIgnoreCase(prodName)||cardItemPrice.equals(itemprice)||totalItemPrice.equals(cardItemPrice))
 	{
 		System.out.println("Information is verfied sussessfuly");
-		
 		driver.findElement(By.id("ptcBtnBottom")).click();
-		
-	}
-	
-	
-	
-	
+	}	
 }
-
 
 private void guestCheckout()
 {
@@ -262,11 +281,6 @@ private void guestCheckout()
 		System.out.println("Logged in as guest account");
 	}
 	
-	
 }
-	  
-	
+	  	
 }
-
-
-
