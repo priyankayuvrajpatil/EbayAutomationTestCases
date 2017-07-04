@@ -15,6 +15,7 @@ public class ApplicationConstant {
 	public static final String symbol="US $";
 	public static final String CartHeader = "Your eBay Shopping Cart";
 	public static final String checkoutScreenPage="Guest checkout";
+	public static final String fileName = "C:/Users/priyanka_patil11/workspace1/Testdata.txt";
 	
 	
 	
