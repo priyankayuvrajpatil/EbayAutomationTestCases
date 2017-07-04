@@ -21,13 +21,19 @@ public class TestEbay {
 public static void main(String[] args) throws InterruptedException, IOException {
 		
 		TestEbay testebay=new TestEbay();
+	
 		
 		
 		  // Open Chrome Browser and Application
 		testebay.openapplication();
 		  
-		//Get Serach key and search product
-		testebay.searchbykey();
+		//Get Serach key and search product //Get Search Key From txt file
+		
+		
+		String SearchKey=ReadFile.FileRead();
+		
+		
+		testebay.searchbykey(driver,SearchKey);
 		
 		//Check listed Search item category is Sony TV
 		testebay.checkListedItemContainsSearchedName(driver, ApplicationConstant.search_key);
@@ -67,6 +73,10 @@ public static void main(String[] args) throws InterruptedException, IOException 
 
 
 
+
+
+
+
 private void openapplication()
 {
 	System.out.println("Inside");
@@ -78,16 +88,29 @@ private void openapplication()
 	
 }
 
-private void searchbykey() throws InterruptedException {
+/*private void searchbykey() throws InterruptedException {
 	System.out.println("Inside searchbykey");
 	searchbox=driver.findElement(By.id(ApplicationConstant.searchbox_id));
-	searchbox.sendKeys(ApplicationConstant.search_key);
+	searchbox.sendKeys(searchKey);
 	System.out.println("Inside searchbykey1");
 	searchbutton=driver.findElement(By.id(ApplicationConstant.searchbutton_id));
 	searchbutton.submit();
 	System.out.println("Inside searchbykey2");
 	Thread.sleep(1000);
 
+}*/
+
+
+private void searchbykey(WebDriver driver2, String searchKey) throws InterruptedException {
+	System.out.println("Inside searchbykey");
+	searchbox=driver.findElement(By.id(ApplicationConstant.searchbox_id));
+	searchbox.sendKeys(searchKey);
+	System.out.println("Inside searchbykey1");
+	searchbutton=driver.findElement(By.id(ApplicationConstant.searchbutton_id));
+	searchbutton.submit();
+	System.out.println("Inside searchbykey2");
+	Thread.sleep(1000);
+	
 }
 
 
